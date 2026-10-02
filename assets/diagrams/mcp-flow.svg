@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="640" viewBox="0 0 1440 640" role="img" aria-labelledby="title desc">
+  <title id="title">MCP search flow</title>
+  <desc id="desc">When no document chunks match, the assistant connects to the search MCP server over HTTP or stdio and calls web_search or image_search. Those tools call SerpAPI.</desc>
+  <defs>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="0.42" stop-color="#2563eb"/>
+      <stop offset="0.72" stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 1.4 9 5 0 8.6Z" fill="#7dd3fc"/>
+    </marker>
+    <clipPath id="card"><rect width="1440" height="640" rx="28"/></clipPath>
+  </defs>
+  <g clip-path="url(#card)" font-family="Inter, Segoe UI, sans-serif">
+    <rect width="1440" height="640" fill="#070d18"/>
+    <rect width="1440" height="6" fill="url(#bar)"/>
+
+    <rect x="36" y="40" width="320" height="540" rx="18" fill="#0b1220" stroke="#a78bfa" stroke-width="2"/>
+    <text x="196" y="84" text-anchor="middle" fill="#c4b5fd" font-size="14" font-weight="700">ASSISTANT</text>
+    <text x="196" y="128" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">getSearchTools</text>
+    <text x="196" y="168" text-anchor="middle" fill="#94a3b8" font-size="15">Called only when retrieval</text>
+    <text x="196" y="192" text-anchor="middle" fill="#94a3b8" font-size="15">returns no chunks</text>
+    <text x="196" y="240" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Connection is cached</text>
+    <text x="196" y="268" text-anchor="middle" fill="#94a3b8" font-size="14">Later turns reuse it</text>
+    <text x="196" y="320" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">If tools fail to load</text>
+    <text x="196" y="348" text-anchor="middle" fill="#94a3b8" font-size="14">The turn continues with</text>
+    <text x="196" y="372" text-anchor="middle" fill="#94a3b8" font-size="14">an empty tool list</text>
+    <text x="196" y="430" text-anchor="middle" fill="#64748b" font-size="14">LangChain MCP adapter</text>
+    <text x="196" y="454" text-anchor="middle" fill="#64748b" font-size="14">Server name: serp-search</text>
+    <text x="196" y="500" text-anchor="middle" fill="#64748b" font-size="14">Tool names are not prefixed</text>
+
+    <line x1="356" y1="250" x2="400" y2="250" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="404" y="40" width="360" height="540" rx="18" fill="#0b1220" stroke="#fbbf24" stroke-width="2"/>
+    <text x="584" y="84" text-anchor="middle" fill="#fcd34d" font-size="14" font-weight="700">TRANSPORT</text>
+    <text x="584" y="124" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="700">HTTP first</text>
+    <text x="584" y="156" text-anchor="middle" fill="#94a3b8" font-size="15">MCP_SERVER_URL</text>
+    <text x="584" y="180" text-anchor="middle" fill="#94a3b8" font-size="15">POST /mcp on port 3002</text>
+    <text x="584" y="214" text-anchor="middle" fill="#64748b" font-size="14">Streamable HTTP, no session id</text>
+
+    <text x="584" y="268" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="700">Then stdio</text>
+    <text x="584" y="300" text-anchor="middle" fill="#94a3b8" font-size="15">HTTP missing or unreachable</text>
+    <text x="584" y="328" text-anchor="middle" fill="#94a3b8" font-size="15">Spawns mcp-search-server/stdio.js</text>
+    <text x="584" y="362" text-anchor="middle" fill="#64748b" font-size="14">Same createServer() as HTTP</text>
+
+    <text x="584" y="430" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Server name</text>
+    <text x="584" y="458" text-anchor="middle" fill="#94a3b8" font-size="15">serp-search-mcp 1.0.0</text>
+    <text x="584" y="500" text-anchor="middle" fill="#64748b" font-size="14">GET and DELETE /mcp return 405</text>
+    <text x="584" y="528" text-anchor="middle" fill="#64748b" font-size="14">Health: GET /health</text>
+
+    <line x1="764" y1="250" x2="808" y2="250" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="812" y="40" width="592" height="250" rx="18" fill="#0b1220" stroke="#34d399" stroke-width="2"/>
+    <text x="1108" y="80" text-anchor="middle" fill="#6ee7b7" font-size="14" font-weight="700">web_search - READ ONLY</text>
+    <text x="1108" y="116" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="700">Google via SerpAPI</text>
+    <text x="1108" y="150" text-anchor="middle" fill="#94a3b8" font-size="15">engine=google, num=5</text>
+    <text x="1108" y="178" text-anchor="middle" fill="#94a3b8" font-size="15">Title, link, date, snippet as markdown</text>
+    <text x="1108" y="214" text-anchor="middle" fill="#fcd34d" font-size="15">today to qdr:d, week to qdr:w, month to qdr:m</text>
+    <text x="1108" y="248" text-anchor="middle" fill="#64748b" font-size="14">The tbs filter is chosen from the query text</text>
+
+    <rect x="812" y="314" width="592" height="266" rx="18" fill="#0b1220" stroke="#22d3ee" stroke-width="2"/>
+    <text x="1108" y="354" text-anchor="middle" fill="#67e8f9" font-size="14" font-weight="700">image_search - READ ONLY</text>
+    <text x="1108" y="392" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="700">Google Images</text>
+    <text x="1108" y="428" text-anchor="middle" fill="#94a3b8" font-size="15">engine=google_images, five images</text>
+    <text x="1108" y="456" text-anchor="middle" fill="#94a3b8" font-size="15">Markdown image tags plus a source line</text>
+    <text x="1108" y="492" text-anchor="middle" fill="#94a3b8" font-size="15">The prompt tells the model to keep those tags</text>
+    <text x="1108" y="528" text-anchor="middle" fill="#64748b" font-size="14">react-markdown renders them in the chat</text>
+  </g>
+</svg>

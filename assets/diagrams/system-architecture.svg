@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">Request workflow</title>
+  <desc id="desc">A chat message moves from the React client to Express. Pinecone returns similarity scores. The server then answers from chunks or offers MCP search tools.</desc>
+  <defs>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="0.42" stop-color="#2563eb"/>
+      <stop offset="0.72" stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 1.4 9 5 0 8.6Z" fill="#7dd3fc"/>
+    </marker>
+    <clipPath id="card"><rect width="1440" height="760" rx="28"/></clipPath>
+  </defs>
+  <g clip-path="url(#card)" font-family="Inter, Segoe UI, sans-serif">
+    <rect width="1440" height="760" fill="#070d18"/>
+    <rect width="1440" height="6" fill="url(#bar)"/>
+
+    <text x="72" y="48" fill="#94a3b8" font-size="14" font-weight="700" letter-spacing="1.2">01  MESSAGE</text>
+    <text x="400" y="48" fill="#94a3b8" font-size="14" font-weight="700" letter-spacing="1.2">02  RETRIEVE</text>
+    <text x="760" y="48" fill="#94a3b8" font-size="14" font-weight="700" letter-spacing="1.2">03  ONE PATH</text>
+    <text x="1148" y="48" fill="#94a3b8" font-size="14" font-weight="700" letter-spacing="1.2">04  JSON REPLY</text>
+
+    <rect x="36" y="72" width="280" height="168" rx="16" fill="#0b1220" stroke="#38bdf8" stroke-width="2"/>
+    <text x="176" y="108" text-anchor="middle" fill="#7dd3fc" font-size="13" font-weight="700">CLIENT</text>
+    <text x="176" y="140" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">Chat</text>
+    <text x="176" y="168" text-anchor="middle" fill="#94a3b8" font-size="15">POST /api/chat</text>
+    <text x="176" y="192" text-anchor="middle" fill="#94a3b8" font-size="15">Waits for one answer</text>
+    <text x="176" y="216" text-anchor="middle" fill="#64748b" font-size="13">Renders markdown</text>
+
+    <line x1="316" y1="156" x2="368" y2="156" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="372" y="72" width="300" height="168" rx="16" fill="#0b1220" stroke="#a78bfa" stroke-width="2"/>
+    <text x="522" y="108" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="700">EXPRESS :3001</text>
+    <text x="522" y="140" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">Chat service</text>
+    <text x="522" y="168" text-anchor="middle" fill="#94a3b8" font-size="15">Validates the message</text>
+    <text x="522" y="192" text-anchor="middle" fill="#94a3b8" font-size="15">Loads session history</text>
+    <text x="522" y="216" text-anchor="middle" fill="#64748b" font-size="13">sessionId defaults to default</text>
+
+    <line x1="672" y1="156" x2="724" y2="156" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="728" y="72" width="320" height="168" rx="16" fill="#0b1220" stroke="#22d3ee" stroke-width="2"/>
+    <text x="888" y="108" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">PINECONE</text>
+    <text x="888" y="140" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">Vector store</text>
+    <text x="888" y="168" text-anchor="middle" fill="#94a3b8" font-size="15">Returns nearest chunks</text>
+    <text x="888" y="192" text-anchor="middle" fill="#94a3b8" font-size="15">with similarity scores</text>
+    <text x="888" y="216" text-anchor="middle" fill="#64748b" font-size="13">The server filters them</text>
+
+    <line x1="1048" y1="156" x2="1100" y2="156" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="1104" y="72" width="300" height="168" rx="16" fill="#0b1220" stroke="#fbbf24" stroke-width="2"/>
+    <text x="1254" y="108" text-anchor="middle" fill="#fcd34d" font-size="13" font-weight="700">ASSISTANT</text>
+    <text x="1254" y="140" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">gpt-4o</text>
+    <text x="1254" y="168" text-anchor="middle" fill="#94a3b8" font-size="15">Temperature 0</text>
+    <text x="1254" y="192" text-anchor="middle" fill="#94a3b8" font-size="15">Cairo date in the prompt</text>
+    <text x="1254" y="216" text-anchor="middle" fill="#64748b" font-size="13">Tools only if no chunks</text>
+
+    <line x1="720" y1="268" x2="720" y2="318" stroke="#7dd3fc" stroke-width="2.5"/>
+    <line x1="220" y1="318" x2="1220" y2="318" stroke="#7dd3fc" stroke-width="2.5"/>
+    <line x1="220" y1="318" x2="220" y2="356" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <line x1="720" y1="318" x2="720" y2="356" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <line x1="1220" y1="318" x2="1220" y2="356" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="48" y="360" width="344" height="250" rx="16" fill="#0b1220" stroke="#22d3ee" stroke-width="2"/>
+    <text x="220" y="400" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">CHUNKS FOUND</text>
+    <text x="220" y="438" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">Document answer</text>
+    <text x="220" y="476" text-anchor="middle" fill="#94a3b8" font-size="15">Chunks go into the prompt</text>
+    <text x="220" y="504" text-anchor="middle" fill="#94a3b8" font-size="15">Search tools are not bound</text>
+    <text x="220" y="532" text-anchor="middle" fill="#94a3b8" font-size="15">Prompt forbids web_search</text>
+    <text x="220" y="572" text-anchor="middle" fill="#64748b" font-size="14">The model quotes the PDF</text>
+
+    <rect x="548" y="360" width="344" height="250" rx="16" fill="#0b1220" stroke="#34d399" stroke-width="2"/>
+    <text x="720" y="400" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">NO CHUNKS</text>
+    <text x="720" y="438" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">Tool loop</text>
+    <text x="720" y="476" text-anchor="middle" fill="#94a3b8" font-size="15">Bind web_search</text>
+    <text x="720" y="504" text-anchor="middle" fill="#94a3b8" font-size="15">Bind image_search</text>
+    <text x="720" y="532" text-anchor="middle" fill="#94a3b8" font-size="15">Up to 6 model steps</text>
+    <text x="720" y="572" text-anchor="middle" fill="#64748b" font-size="14">MCP server, then SerpAPI</text>
+
+    <rect x="1048" y="360" width="344" height="250" rx="16" fill="#0b1220" stroke="#60a5fa" stroke-width="2"/>
+    <text x="1220" y="400" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">NO TOOL CALL</text>
+    <text x="1220" y="438" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">Direct reply</text>
+    <text x="1220" y="476" text-anchor="middle" fill="#94a3b8" font-size="15">Greetings</text>
+    <text x="1220" y="504" text-anchor="middle" fill="#94a3b8" font-size="15">Today's date from the prompt</text>
+    <text x="1220" y="532" text-anchor="middle" fill="#94a3b8" font-size="15">Questions that need no lookup</text>
+    <text x="1220" y="572" text-anchor="middle" fill="#64748b" font-size="14">The loop returns the text</text>
+
+    <text x="720" y="668" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">{ answer } is stored in memory, then sent to the client</text>
+    <text x="720" y="700" text-anchor="middle" fill="#94a3b8" font-size="15">History keeps the last 20 user and assistant texts. Tool traces are not stored.</text>
+  </g>
+</svg>

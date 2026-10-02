@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="640" viewBox="0 0 1440 640" role="img" aria-labelledby="title desc">
+  <title id="title">How the assistant chooses</title>
+  <desc id="desc">The chat service queries Pinecone first. Pinecone returns scores. If the server keeps a chunk, the model answers from the document with no tools. Otherwise the model may search or reply directly.</desc>
+  <defs>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="0.42" stop-color="#2563eb"/>
+      <stop offset="0.72" stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 1.4 9 5 0 8.6Z" fill="#7dd3fc"/>
+    </marker>
+    <clipPath id="card"><rect width="1440" height="640" rx="28"/></clipPath>
+  </defs>
+  <g clip-path="url(#card)" font-family="Inter, Segoe UI, sans-serif">
+    <rect width="1440" height="640" fill="#070d18"/>
+    <rect width="1440" height="6" fill="url(#bar)"/>
+
+    <rect x="470" y="36" width="500" height="92" rx="16" fill="#0b1220" stroke="#a78bfa" stroke-width="2"/>
+    <text x="720" y="72" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">Every chat message</text>
+    <text x="720" y="100" text-anchor="middle" fill="#c4b5fd" font-size="15">The server retrieves before the model is called</text>
+
+    <line x1="720" y1="128" x2="720" y2="168" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="420" y="172" width="600" height="100" rx="16" fill="#10213b" stroke="#22d3ee" stroke-width="2"/>
+    <text x="720" y="210" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="700">Did the server keep a chunk?</text>
+    <text x="720" y="240" text-anchor="middle" fill="#94a3b8" font-size="15">Pinecone returns scores. The server applies the cutoff.</text>
+
+    <line x1="720" y1="272" x2="720" y2="312" stroke="#7dd3fc" stroke-width="2.5"/>
+    <line x1="250" y1="312" x2="1190" y2="312" stroke="#7dd3fc" stroke-width="2.5"/>
+    <line x1="250" y1="312" x2="250" y2="348" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <line x1="720" y1="312" x2="720" y2="348" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <line x1="1190" y1="312" x2="1190" y2="348" stroke="#7dd3fc" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="48" y="360" width="404" height="230" rx="16" fill="#0b1220" stroke="#22d3ee" stroke-width="2"/>
+    <text x="250" y="402" text-anchor="middle" fill="#67e8f9" font-size="14" font-weight="700">YES — DOCUMENT</text>
+    <text x="250" y="440" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">Grounded answer</text>
+    <text x="250" y="478" text-anchor="middle" fill="#94a3b8" font-size="15">Chunks numbered in the prompt</text>
+    <text x="250" y="506" text-anchor="middle" fill="#94a3b8" font-size="15">tools = [ ]</text>
+    <text x="250" y="542" text-anchor="middle" fill="#64748b" font-size="14">Web search stays closed this turn</text>
+
+    <rect x="518" y="360" width="404" height="230" rx="16" fill="#0b1220" stroke="#34d399" stroke-width="2"/>
+    <text x="720" y="402" text-anchor="middle" fill="#6ee7b7" font-size="14" font-weight="700">NO CHUNK — SEARCH</text>
+    <text x="720" y="440" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">Model calls a tool</text>
+    <text x="720" y="478" text-anchor="middle" fill="#94a3b8" font-size="15">web_search for live facts</text>
+    <text x="720" y="506" text-anchor="middle" fill="#94a3b8" font-size="15">image_search to show pictures</text>
+    <text x="720" y="542" text-anchor="middle" fill="#64748b" font-size="14">Results return as tool messages</text>
+
+    <rect x="988" y="360" width="404" height="230" rx="16" fill="#0b1220" stroke="#60a5fa" stroke-width="2"/>
+    <text x="1190" y="402" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">NO CHUNK — DIRECT</text>
+    <text x="1190" y="440" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">No tool call</text>
+    <text x="1190" y="478" text-anchor="middle" fill="#94a3b8" font-size="15">Greeting or general reply</text>
+    <text x="1190" y="506" text-anchor="middle" fill="#94a3b8" font-size="15">Date comes from the prompt</text>
+    <text x="1190" y="542" text-anchor="middle" fill="#64748b" font-size="14">First response with zero tool calls</text>
+  </g>
+</svg>
